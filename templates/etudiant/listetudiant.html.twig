@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    
+   
+        <table class="w-100" id="myTable">
+            <thead>
+                <tr>
+                    <th class="text-center w-10">matricule</th>
+                    <th class="text-center w-10">Nom</th>
+                    <th class="text-center w-10">Prenom</th>
+                    <th class="text-center w-10">Date naissance</th>
+                    <th class="text-center w-10">Email</th>
+                    <th class="text-center w-10">Tel</th>
+                    <th class="text-center w-10">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for etudiant in etudiants %}
+                    <tr>
+                        <td class="text-center w-10"> {{ etudiant.matricule }} </td>
+                        <td class="text-center w-10"> {{ etudiant.nom }} </td>
+                        <td class="text-center w-10"> {{ etudiant.prenom }} </td>
+                        <td class="text-center w-10"> {{ etudiant.datenaissance|date('d/m/Y') }} </td>
+                        <td class="text-center w-10"> {{ etudiant.email }} </td>
+                        <td class="text-center w-10"> {{ etudiant.tel }} </td>
+                        <td class="w-10">
+                            <a href="{{path('etudiant_update',{'id': etudiant.id})}}" class="btn btn-primary ml-5"> Modifier </a>
+                            <a href="{{path('etudiant_delete',{'id': etudiant.id})}}" onclick="return confirm('Supprimer ???');" class="btn btn-danger"> Suprrimer </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                
+            </tbody>
+            
+        </table>
+        
+{% endblock %}

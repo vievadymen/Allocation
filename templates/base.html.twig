@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{asset('css/home.css')}}">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css"><font></font>
+        <font></font>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script><font></font>
+
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        <div class="row">
+            <div class="col-lg-4"><img src="{{asset('img/Logo-Sonatel-Academy-480_1-1.png')}}" alt="" width=100 height=44 id="logo" ></div>
+            <div class="col-lg-8">
+        
+                <!-- Navbar -->
+                <nav class="navbar  navbar-expand-lg navbar-dark scrolling-navbar">
+                    <div class="container">
+
+                        <!-- Collapse -->
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <!-- Links -->
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                            <!-- Left -->
+                            <ul class="navbar-nav mr-auto navbar-right">
+                                <li class="nav-item">
+                                    <a class="nav-link text-danger" href="/">Accueil</a>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" href="{{ path('addetudiant') }}">Ajouter étudiants</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" href="{{ path('addchambre') }}">Ajouter chambres</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" href="{{ path('listetudiant') }}">Liste etudiants</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" href="{{ path('listchambre') }}">Liste chambres</a>
+                                </li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- Navbar -->
+        <div class="container bg-light">
+            {% block body %}{% endblock %}
+        </div>
+        {% block javascripts %}
+<script>
+$(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+</script>
+{% endblock %}
+    </body>
+</html>
