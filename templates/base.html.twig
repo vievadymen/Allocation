@@ -7,9 +7,7 @@
         <link rel="stylesheet" href="{{asset('css/home.css')}}">
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css"><font></font>
         <font></font>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script><font></font>
-
+        
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
@@ -60,12 +58,10 @@
         <div class="container bg-light">
             {% block body %}{% endblock %}
         </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script><font></font>
+        <script src="{{ asset('script.js') }}"></script>
         {% block javascripts %}
-<script>
-$(document).ready( function () {
-    $('#myTable').DataTable();
-} );
-</script>
 {% endblock %}
     </body>
 </html>

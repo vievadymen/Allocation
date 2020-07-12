@@ -3,6 +3,7 @@
 {% block body %}
     
     {{ form_start(formChambre) }}
+    <input type="hidden" id="nbrfield" value="{{ nbrField }}" name="">
     {{ form_widget(formChambre) }}
     <button class=" btn btn-primary "type="submit">Enregister</button>
     {{ form_end(formChambre) }}

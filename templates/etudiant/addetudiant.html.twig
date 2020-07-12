@@ -3,6 +3,7 @@
 {% block body %}
     
     {{ form_start(formEtudiant) }}
+    <input type="hidden" id="matricule" value="{{ nbrField }}" name="">
     {{ form_widget(formEtudiant) }}
     <button class=" btn btn-primary "type="submit">Enregister</button>
     {{ form_end(formEtudiant) }}

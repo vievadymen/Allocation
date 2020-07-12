@@ -29,6 +29,8 @@ class ChambreController extends AbstractController
      */
     public function addchambre( Request $request, EntityManagerInterface $em ) :Response {
 
+        $rp = $em->getRepository(Chambre::class);
+        $nbrField = count($rp->findAll());
         $chambre = new Chambre();
         $formChambre = $this->createForm(ChambreType::class, $chambre);
         $formChambre->handleRequest($request);
@@ -38,7 +40,8 @@ class ChambreController extends AbstractController
         }
 
         return $this->render('/chambre/addchambre.html.twig',[
-            'formChambre'=>$formChambre->createView()
+            'formChambre'=>$formChambre->createView(),
+            'nbrField' => $nbrField
         ]);
     }
 
@@ -49,22 +52,19 @@ class ChambreController extends AbstractController
 
         $chambres = $repo->findAll(); // Afficher l'intégralité de l'entité Chambre
         
-        $pagination= $paginator->paginate(
-            $chambres,
-            $request->query->getInt('page', 1),
-            5
-        );
-
         return $this->render('/chambre/listchambre.html.twig', [
-            'Chambres' => $pagination
+            'Chambres' => $chambres
         ]);
     }
 
     /**
      * @Route("/chambre/{id<[0-9]+>}/update", name="chambre_update")
      */
-    public function update(Request $request, EntityManagerInterface $em, chambre $chambre):Response
+    public function update(Request $request, EntityManagerInterface $em, Chambre $chambre):Response
     {
+
+        $rp = $em->getRepository(Chambre::class);
+        $nbrField = count($rp->findAll());
         $formChambre = $this->createForm(chambreType::class, $chambre);
         $formChambre->handleRequest($request);
         if($formChambre->isSubmitted() && $formChambre->isValid()){
@@ -76,6 +76,7 @@ class ChambreController extends AbstractController
       return $this->render('chambre/addchambre.html.twig',[
           'chambre'=> $chambre,
           'formChambre' => $formChambre->createView(),
+          'nbrField' => $nbrField
       ]);
     
     }

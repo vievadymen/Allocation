@@ -37,6 +37,8 @@ class EtudiantController extends AbstractController
      */
     public function addetudiant( Request $request, EntityManagerInterface $em ) :Response {
 
+        $rp = $em->getRepository(Etudiant::class);
+        $nbrField = count($rp->findAll());
         $etudiant = new Etudiant();
         $formEtudiant = $this->createForm(EtudiantType::class, $etudiant);
         $formEtudiant->handleRequest($request);
@@ -48,7 +50,8 @@ class EtudiantController extends AbstractController
 
 
         return $this->render('/etudiant/addetudiant.html.twig', [
-            'formEtudiant'=>$formEtudiant->createView()
+            'formEtudiant'=>$formEtudiant->createView(),
+            'nbrField' => $nbrField
         ]);
     }
 
@@ -58,15 +61,9 @@ class EtudiantController extends AbstractController
     public function listetudiant( EtudiantRepository $repo, PaginatorInterface $paginator, Request $request ) {
 
         $etudiants = $repo->findAll(); // Afficher l'intégralité de l'entité Etudiant
-        
-        $pagination= $paginator->paginate(
-            $etudiants,
-            $request->query->getInt('page', 1),
-            5
-        );
 
         return $this->render('/etudiant/listetudiant.html.twig', [
-            'etudiants' => $pagination
+            'etudiants' => $etudiants
         ]);
     }
 
@@ -75,6 +72,8 @@ class EtudiantController extends AbstractController
      */
     public function update(Request $request, EntityManagerInterface $em, Etudiant $etudiant):Response
     {
+        $rp = $em->getRepository(Etudiant::class);
+        $nbrField = count($rp->findAll());
         $formEtudiant = $this->createForm(EtudiantType::class, $etudiant);
         $formEtudiant->handleRequest($request);
         if($formEtudiant->isSubmitted() && $formEtudiant->isValid()){
@@ -86,6 +85,7 @@ class EtudiantController extends AbstractController
       return $this->render('etudiant/addetudiant.html.twig',[
           'etudiant'=> $etudiant,
           'formEtudiant' => $formEtudiant->createView(),
+            'nbrField' => $nbrField,
       ]);
     
     }
